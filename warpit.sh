@@ -39,11 +39,19 @@ echo "y" | warp-cli registration new
 echo "Setting mode to proxy..."
 warp-cli mode proxy
 
-echo "Proxy port is $PORT..."
-warp-cli proxy port "$PORT"
+echo "**************************************"
+read -p "Enter the WARP PORT: " PORT
+if ! [[ "$PORT" =~ ^[0-9]+$ ]]; then
+    echo "Error: $PORT is not a valid number."
+    exit 1
+fi
+echo "Target port set to: $PORT"
+echo "**************************************"
 
 echo "one final warp"
 warp-cli connect
+
+clear
 
 echo "**************************************"
 echo "We are WARPing at: $PORT"
