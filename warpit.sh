@@ -1,7 +1,9 @@
 #!/bin/bash
 
-# foorsee
-# *Tel-Aviv imressed*
+echo "foorsee"
+echo "*Tel-Aviv impressed*"
+
+wait 3
 
 if [ "$EUID" -ne 0 ]; then
   echo "root only"
@@ -13,7 +15,7 @@ OS_ID=$(lsb_release -is | tr '[:upper:]' '[:lower:]')
 VERSION_CODENAME=$(lsb_release -cs)
 
 if [[ "$OS_ID" != "ubuntu" && "$OS_ID" != "debian" ]]; then
-  echo "Error: This script only works on Ubuntu or Debian."
+  echo "This script only works on Ubuntu or Debian!"
   exit 1
 fi
 
@@ -27,27 +29,23 @@ curl -fsSL https://pkg.cloudflareclient.com/pubkey.gpg | gpg --yes --dearmor -o 
 
 echo "deb [signed-by=/usr/share/keyrings/cloudflare-warp-archive-keyring.gpg] https://pkg.cloudflareclient.com/ $VERSION_CODENAME main" | tee /etc/apt/sources.list.d/cloudflare-client.list
 
-echo "suka go WARPit!"
-
 apt-get update && apt-get install -y cloudflare-warp
 
 echo "**************************************"
-
-read -p "Enter the proxy port you want to use. it will be used in outbound section! : " PORT
+read -p "enter the WARP port: " PORT
 
 echo "y" | warp-cli registration new
 
-echo "Setting mode to proxy..."
+echo "proxy"
 warp-cli mode proxy
 
-echo "Proxy port is $PORT..."
+echo "proxy port: $PORT"
 warp-cli proxy port "$PORT"
 
-echo "one final warp"
+echo "WARPIIING"
 warp-cli connect
 
-clear
-
 echo "**************************************"
-echo "We are WARPing at: $PORT"
-echo "You can verify with: curl -x socks5h://localhost:$PORT https://www.cloudflare.com/cdn-cgi/trace"
+echo "WARPing at: $PORT"
+echo "Tesling:"
+echo "curl -x socks5h://localhost:$PORT https://www.cloudflare.com/cdn-cgi/trace"
