@@ -1,9 +1,11 @@
 #!/bin/bash
 
+clear
+
 echo "foorsee"
 echo "*Tel-Aviv impressed*"
 
-wait 3
+sleep 3
 
 if [ "$EUID" -ne 0 ]; then
   echo "root only"
