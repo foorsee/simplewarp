@@ -34,7 +34,7 @@ echo "deb [signed-by=/usr/share/keyrings/cloudflare-warp-archive-keyring.gpg] ht
 apt-get update && apt-get install -y cloudflare-warp
 
 echo "**************************************"
-read -p "enter the WARP port: " PORT
+read -p "enter the WARP port: " PORT < /dev/tty
 
 echo "y" | warp-cli registration new
 
