@@ -34,7 +34,13 @@ echo "deb [signed-by=/usr/share/keyrings/cloudflare-warp-archive-keyring.gpg] ht
 apt-get update && apt-get install -y cloudflare-warp
 
 echo "**************************************"
-read -p "enter the WARP port: " PORT < /dev/tty
+while true; do
+  read -p "Enter the WARP port: " PORT < /dev/tty
+  if [[ "$PORT" =~ ^[0-9]+$ ]] && [ "$PORT" -ge 1 ] && [ "$PORT" -le 65535 ]; then
+    break
+  fi
+  echo "Invalid port. Enter a number (1–65535)."
+done
 
 echo "y" | warp-cli registration new
 
