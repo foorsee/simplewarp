@@ -2,6 +2,11 @@
   <a href="https://t.me/LarpVPN">LarpVPN</a>
 </h1>
 
+Usage
+```bash
+curl -sSL https://raw.githubusercontent.com/foorsee/simplewarp/refs/heads/main/warpit.sh | sudo bash
+```
+
 <h3>Add to outbounds section:</h3>
 
 ```json
